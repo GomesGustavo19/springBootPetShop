@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 
-@Entity
-@Table(name = "cliente")
+@Entity(name = "cliente")
 public class ClienteModel implements Serializable {
 
     @Id
@@ -17,10 +16,6 @@ public class ClienteModel implements Serializable {
     private String endereco;
 
     public ClienteModel() {
-    }
-
-    public ClienteModel(Integer id) {
-        this.id = id;
     }
 
     public ClienteModel(Integer id, String nomeDoDono, String documentoCPF, String nomeDoPet, String endereco) {

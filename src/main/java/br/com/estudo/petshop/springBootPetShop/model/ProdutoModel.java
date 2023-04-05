@@ -1,12 +1,14 @@
 package br.com.estudo.petshop.springBootPetShop.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.io.Serializable;
-@Entity
-@Table(name = "produto")
-public class ProdutoModel implements Serializable {
 
+@Entity(name = "produto")
+public class ProdutoModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -15,8 +17,7 @@ public class ProdutoModel implements Serializable {
     private double valor;
     private int quantidade;
 
-    public ProdutoModel(Integer id) {
-        this.id = id;
+    public ProdutoModel() {
     }
 
     public ProdutoModel(Integer id, int codigoDoProduto, String nomeDoProduto, double valor, int quantidade) {
@@ -25,9 +26,6 @@ public class ProdutoModel implements Serializable {
         this.nomeDoProduto = nomeDoProduto;
         this.valor = valor;
         this.quantidade = quantidade;
-    }
-
-    public ProdutoModel() {
     }
 
     public Integer getId() {
