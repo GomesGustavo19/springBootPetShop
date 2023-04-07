@@ -48,7 +48,7 @@ public class SpringBootPetShopController {
 
     }
 
-    @GetMapping(value = "buscarId")
+    @GetMapping(value = "buscarPorId")
     @ResponseBody
     public ResponseEntity<ClienteModel> buscarCliente(@RequestParam(name = "id") Integer id){
 
