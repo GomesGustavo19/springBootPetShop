@@ -1,14 +1,17 @@
 package br.com.estudo.petshop.springBootPetShop.controller;
 
+import br.com.estudo.petshop.springBootPetShop.dto.mapper.ClienteMapper;
+import br.com.estudo.petshop.springBootPetShop.dto.response.CepResponse;
+import br.com.estudo.petshop.springBootPetShop.dto.response.ClienteResponse;
+import br.com.estudo.petshop.springBootPetShop.dto.resquest.ClienteRequest;
 import br.com.estudo.petshop.springBootPetShop.model.ClienteModel;
 import br.com.estudo.petshop.springBootPetShop.repository.ClienteRepository;
+import br.com.estudo.petshop.springBootPetShop.service.CepService;
+import br.com.estudo.petshop.springBootPetShop.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,14 +21,21 @@ public class SpringBootPetShopController {
 
     @Autowired
     private ClienteRepository clienteRepository;
+    @Autowired
+    private CepService service;
+
+    @Autowired
+    private ClienteService serviceCliente;
 
     @PostMapping(value = "cadastroCliente")
     @ResponseBody
-    public ResponseEntity<ClienteModel> cadastroCliente(@RequestBody ClienteModel clienteModel){
+    public ResponseEntity<ClienteResponse> cadastroCliente(@RequestBody ClienteRequest request){
 
-        ClienteModel cliente = clienteRepository.save(clienteModel);
+        ClienteModel model = ClienteMapper.toCliente(request);
+        ClienteModel modelSalvo = serviceCliente.salvar(model).getBody();
+        ClienteResponse reponse = ClienteMapper.toClienteReponse(modelSalvo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(reponse);
 
-        return new ResponseEntity<>(cliente, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "listarCliente")
@@ -68,5 +78,11 @@ public class SpringBootPetShopController {
 
         return new ResponseEntity<ClienteModel>(cliente,HttpStatus.OK);
 
+    }
+
+    @GetMapping(value = "pesquisarCep/{cep}")
+    @ResponseBody
+    public CepResponse pesquisaDeCep(@PathVariable("cep") String cep){
+        return service.pesquisarCep(cep);
     }
 }

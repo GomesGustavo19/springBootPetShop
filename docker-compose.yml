@@ -9,7 +9,7 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: root
     ports:
-      - "3306:3306"
+      - '3306:3306'
     volumes:
       - ./petshop_data:/var/lib/mysql
 
@@ -20,8 +20,5 @@ services:
     image: app.jar
     ports:
       - "8080:8080"
-    depends_on:
-      - db
-
 volumes:
   petshop_data:

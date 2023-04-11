@@ -1,7 +1,6 @@
 package br.com.estudo.petshop.springBootPetShop.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -17,6 +16,6 @@ public class ClienteModel implements Serializable {
     private String nomeDoDono;
     private String documentoCPF;
     private String nomeDoPet;
-    private String endereco;
+    private String cep;
 
 }
