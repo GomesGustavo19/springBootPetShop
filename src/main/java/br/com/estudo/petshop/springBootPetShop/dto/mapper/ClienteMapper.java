@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutionException;
 
 public class ClienteMapper {
 
-    public static ClienteModel toCliente(ClienteRequest request){
+    public static ClienteModel toCliente(ClienteRequest request) {
         ClienteModel clienteModel = new ClienteModel();
         clienteModel.setNomeDoDono(request.getNomeDoDono());
         clienteModel.setDocumentoCPF(request.getDocumentoCPF());
@@ -19,7 +19,7 @@ public class ClienteMapper {
 
     }
 
-    public static ClienteResponse toClienteReponse(ClienteModel clienteModel){
+    public static ClienteResponse toClienteReponse(ClienteModel clienteModel) {
         ClienteResponse reponse = new ClienteResponse();
         reponse.setId(clienteModel.getId());
         reponse.setNomeDoDono(clienteModel.getNomeDoDono());
@@ -30,13 +30,13 @@ public class ClienteMapper {
         return reponse;
     }
 
-    public static List<ClienteResponse> toClienteListReponse(List<ClienteModel> modelListar){
+    public static List<ClienteResponse> toClienteListReponse(List<ClienteModel> modelListar) {
 
         List<ClienteResponse> responseLista = new ArrayList<>();
 
-        for (ClienteModel clienteModel : modelListar){
+        for (ClienteModel model : modelListar) {
 
-            ClienteResponse response = ClienteMapper.toClienteReponse(clienteModel);
+            ClienteResponse response = toClienteReponse(model);
 
             responseLista.add(response);
 
