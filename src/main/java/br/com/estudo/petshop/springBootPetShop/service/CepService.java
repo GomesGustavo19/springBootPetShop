@@ -38,8 +38,6 @@ public class CepService {
             model.setBairro(cepModels.getBairro());
             model.setLogradouro(cepModels.getLogradouro());
 
-            System.out.println(cepJason);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
