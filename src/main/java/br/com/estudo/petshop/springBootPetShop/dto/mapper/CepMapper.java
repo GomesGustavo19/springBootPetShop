@@ -11,10 +11,6 @@ public class CepMapper {
 
         CepModel cepModel = new CepModel();
         request.setCep(request.getCep());
-        request.setLocalidade(request.getLocalidade());
-        request.setBairro(request.getBairro());
-        request.setLogradouro(request.getLogradouro());
-        request.setComplemento(request.getComplemento());
         return cepModel;
 
     }
@@ -27,7 +23,6 @@ public class CepMapper {
         cepResponse.setLocalidade(cepModel.getLocalidade());
         cepResponse.setBairro(cepModel.getBairro());
         cepResponse.setLogradouro(cepModel.getLogradouro());
-        cepResponse.setComplemento(cepModel.getComplemento());
         return cepResponse;
 
         }

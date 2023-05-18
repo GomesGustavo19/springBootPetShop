@@ -1,6 +1,5 @@
 package br.com.estudo.petshop.springBootPetShop.dto.response;
 
-import br.com.estudo.petshop.springBootPetShop.model.CepModel;
 import lombok.*;
 @Data
 @NoArgsConstructor

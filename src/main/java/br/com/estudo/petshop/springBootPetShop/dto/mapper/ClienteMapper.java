@@ -2,30 +2,48 @@ package br.com.estudo.petshop.springBootPetShop.dto.mapper;
 
 import br.com.estudo.petshop.springBootPetShop.dto.response.ClienteResponse;
 import br.com.estudo.petshop.springBootPetShop.dto.resquest.ClienteRequest;
+import br.com.estudo.petshop.springBootPetShop.exception.PesquisaCepException;
+import br.com.estudo.petshop.springBootPetShop.model.CepModel;
 import br.com.estudo.petshop.springBootPetShop.model.ClienteModel;
+import br.com.estudo.petshop.springBootPetShop.service.CepService;
 
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 public class ClienteMapper {
 
     public static ClienteModel toCliente(ClienteRequest request) {
         ClienteModel clienteModel = new ClienteModel();
+        CepService cepService = new CepService();
+        CepModel cepModel = cepService.pesquisarCep(request.getCep());
+
         clienteModel.setNomeDoDono(request.getNomeDoDono());
         clienteModel.setDocumentoCPF(request.getDocumentoCPF());
         clienteModel.setNomeDoPet(request.getNomeDoPet());
         clienteModel.setCep(request.getCep());
+        clienteModel.setNumeroResidencia(request.getNumeroResidencia());
+        clienteModel.setLocalidade(cepModel.getLocalidade());
+        if (cepModel.getLocalidade() == null)
+            throw new PesquisaCepException("CEP Informado invalido");
+        clienteModel.setBairro(cepModel.getBairro());
+        clienteModel.setLogradouro(cepModel.getLogradouro());
+
         return clienteModel;
 
     }
 
     public static ClienteResponse toClienteReponse(ClienteModel clienteModel) {
         ClienteResponse reponse = new ClienteResponse();
+
         reponse.setId(clienteModel.getId());
         reponse.setNomeDoDono(clienteModel.getNomeDoDono());
         reponse.setDocumentoCPF(clienteModel.getDocumentoCPF());
         reponse.setNomeDoPet(clienteModel.getNomeDoPet());
         reponse.setCep(clienteModel.getCep());
+        reponse.setNumeroResidencia(clienteModel.getNumeroResidencia());
+        reponse.setLocalidade(clienteModel.getLocalidade());
+        reponse.setBairro(clienteModel.getBairro());
+        reponse.setLogradouro(clienteModel.getLogradouro());
+
 
         return reponse;
     }

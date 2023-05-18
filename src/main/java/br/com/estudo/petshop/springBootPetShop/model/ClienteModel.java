@@ -17,5 +17,11 @@ public class ClienteModel implements Serializable {
     private String documentoCPF;
     private String nomeDoPet;
     private String cep;
+    private String numeroResidencia;
+    private String localidade;
+    private String bairro;
+    private String logradouro;
+
+
 
 }

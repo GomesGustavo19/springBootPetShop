@@ -1,7 +1,6 @@
 package br.com.estudo.petshop.springBootPetShop.controller;
 
 import br.com.estudo.petshop.springBootPetShop.dto.mapper.ClienteMapper;
-import br.com.estudo.petshop.springBootPetShop.dto.response.CepResponse;
 import br.com.estudo.petshop.springBootPetShop.dto.response.ClienteResponse;
 import br.com.estudo.petshop.springBootPetShop.dto.resquest.ClienteRequest;
 import br.com.estudo.petshop.springBootPetShop.model.ClienteModel;
@@ -21,11 +20,7 @@ public class ClienteController {
     @Autowired
     private ClienteService service;
 
-    @Autowired
-    private CepService serviceCEP;
-
     @PostMapping(value = "cadastro")
-    @ResponseBody
     public ResponseEntity<ClienteResponse> cadastroCliente(@RequestBody ClienteRequest request) {
 
         ClienteModel model = ClienteMapper.toCliente(request);
@@ -36,7 +31,6 @@ public class ClienteController {
     }
 
     @GetMapping(value = "listar")
-    @ResponseBody
     public List<ClienteResponse> listarUsario() {
         ClienteModel clienteModel = new ClienteModel();
         List<ClienteModel> modelListar = service.listarUsario().getBody();
@@ -45,7 +39,6 @@ public class ClienteController {
     }
 
     @DeleteMapping(value = "excluir")
-    @ResponseBody
     public ResponseEntity<String> excluirCliente(@RequestParam(name = "id") Integer id) {
 
         return service.excluirCliente(id);
@@ -53,7 +46,6 @@ public class ClienteController {
     }
 
     @PutMapping(value = "atualizar")
-    @ResponseBody
     public ResponseEntity<ClienteResponse> atualizarCliente(@RequestBody ClienteRequest request) {
 
         ClienteModel model = ClienteMapper.toCliente(request);
@@ -63,9 +55,4 @@ public class ClienteController {
 
     }
 
-    @GetMapping(value = "pesquisarCep/{cep}")
-    @ResponseBody
-    public CepResponse pesquisaDeCep(@PathVariable("cep") String cep) {
-        return serviceCEP.pesquisarCep(cep);
-    }
 }

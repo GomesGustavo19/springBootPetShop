@@ -1,12 +1,9 @@
 package br.com.estudo.petshop.springBootPetShop.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Setter
+@Getter
 public class ProdutoResponse {
 
     private Integer id;

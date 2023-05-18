@@ -20,7 +20,6 @@ public class ProdutoController {
     private ProdutoService service;
 
     @PostMapping(value = "cadastro")
-    @ResponseBody
     public ResponseEntity<ProdutoResponse> salvar(@RequestBody ProdutoRequest request){
 
         ProdutoModel model = ProdutoMapper.toPorduto(request);
@@ -31,7 +30,6 @@ public class ProdutoController {
 
     }
     @GetMapping(value = "listar")
-    @ResponseBody
     public List<ProdutoResponse> listar(){
         ProdutoModel model = new ProdutoModel();
         List<ProdutoModel> modelListado = service.listar().getBody();
@@ -39,14 +37,12 @@ public class ProdutoController {
     }
 
     @DeleteMapping(value = "excluir")
-    @ResponseBody
     public ResponseEntity<String> excluirPorID(@RequestParam(name = "id") Integer id){
 
         return service.excluirPorId(id);
 
     }
     @PutMapping(value = "atualizar")
-    @ResponseBody
     public ResponseEntity<ProdutoResponse> atualizarPorId(@RequestBody ProdutoRequest request){
 
         ProdutoModel model = ProdutoMapper.toPorduto(request);

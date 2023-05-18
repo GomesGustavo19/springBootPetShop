@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.swing.*;
 import java.util.List;
 
 @Service
@@ -16,15 +17,15 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository repository;
 
-    public ResponseEntity<ProdutoModel> salvar(ProdutoModel model){
+    public ResponseEntity<ProdutoModel> salvar(ProdutoModel model) {
 
-        ProdutoModel produtoModel  = repository.save(model);
+        ProdutoModel produtoModel = repository.save(model);
 
         return new ResponseEntity<ProdutoModel>(produtoModel, HttpStatus.CREATED);
 
     }
 
-    public ResponseEntity<List<ProdutoModel>> listar(){
+    public ResponseEntity<List<ProdutoModel>> listar() {
 
         List<ProdutoModel> modeList = repository.findAll();
 
@@ -43,13 +44,13 @@ public class ProdutoService {
 
     public ResponseEntity<ProdutoModel> atualizarPorId(ProdutoModel model) {
 
-        if (model.getId() == null){
+        if (model.getId() == null) {
             System.out.println("É necessario digitar o id para atualizar");
             return new ResponseEntity<ProdutoModel>(HttpStatus.BAD_REQUEST);
         } else if (model.getId() == model.getId()) {
             ProdutoModel produtoModel = repository.saveAndFlush(model);
             return new ResponseEntity<ProdutoModel>(produtoModel, HttpStatus.OK);
-        }else {
+        } else {
             return new ResponseEntity<ProdutoModel>(HttpStatus.BAD_REQUEST);
         }
     }
