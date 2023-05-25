@@ -1,12 +1,9 @@
 package br.com.estudo.petshop.springBootPetShop.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.io.Serializable;
+import java.util.Objects;
 
-@Data
 @Entity
 @Table(name = "produtos")
 public class ProdutoModel implements Serializable {
@@ -18,4 +15,78 @@ public class ProdutoModel implements Serializable {
     private double valor;
     private int quantidade;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private CategoriaModel categoria;
+
+    @Deprecated
+    public ProdutoModel() {}
+
+    public ProdutoModel(Integer id, int codigoDoProduto, String nomeDoProduto, double valor, int quantidade) {
+        this.id = id;
+        this.codigoDoProduto = codigoDoProduto;
+        this.nomeDoProduto = nomeDoProduto;
+        this.valor = valor;
+        this.quantidade = quantidade;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public int getCodigoDoProduto() {
+        return codigoDoProduto;
+    }
+
+    public void setCodigoDoProduto(int codigoDoProduto) {
+        this.codigoDoProduto = codigoDoProduto;
+    }
+
+    public String getNomeDoProduto() {
+        return nomeDoProduto;
+    }
+
+    public void setNomeDoProduto(String nomeDoProduto) {
+        this.nomeDoProduto = nomeDoProduto;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProdutoModel that = (ProdutoModel) o;
+        return nomeDoProduto.equals(that.nomeDoProduto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nomeDoProduto);
+    }
+
+    @Override
+    public String toString() {
+        return "ProdutoModel{" +
+                "id=" + id +
+                ", codigoDoProduto=" + codigoDoProduto +
+                ", nomeDoProduto='" + nomeDoProduto + '\'' +
+                ", valor=" + valor +
+                ", quantidade=" + quantidade +
+                '}';
+    }
 }

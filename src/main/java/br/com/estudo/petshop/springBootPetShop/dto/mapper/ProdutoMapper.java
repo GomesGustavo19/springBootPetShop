@@ -11,7 +11,6 @@ public class ProdutoMapper {
 
     public static ProdutoModel toPorduto(ProdutoRequest request) {
         ProdutoModel model = new ProdutoModel();
-        model.setId(request.getId());
         model.setNomeDoProduto(request.getNomeDoProduto());
         model.setQuantidade(request.getQuantidade());
         model.setValor(request.getValor());
