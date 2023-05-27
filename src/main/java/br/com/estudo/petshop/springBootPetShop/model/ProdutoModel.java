@@ -22,12 +22,13 @@ public class ProdutoModel implements Serializable {
     @Deprecated
     public ProdutoModel() {}
 
-    public ProdutoModel(Integer id, int codigoDoProduto, String nomeDoProduto, double valor, int quantidade) {
+    public ProdutoModel(Integer id, int codigoDoProduto, String nomeDoProduto, double valor, int quantidade, CategoriaModel categoria) {
         this.id = id;
         this.codigoDoProduto = codigoDoProduto;
         this.nomeDoProduto = nomeDoProduto;
         this.valor = valor;
         this.quantidade = quantidade;
+        this.categoria = categoria;
     }
 
     public Integer getId() {
@@ -64,6 +65,14 @@ public class ProdutoModel implements Serializable {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public CategoriaModel getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaModel categoria) {
+        this.categoria = categoria;
     }
 
     @Override

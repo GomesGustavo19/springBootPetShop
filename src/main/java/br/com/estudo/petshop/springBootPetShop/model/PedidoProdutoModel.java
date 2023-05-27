@@ -10,17 +10,18 @@ public class PedidoProdutoModel {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn (name = "produto_id")
+    @JoinColumn(name = "produto_id", nullable = false)
     private ProdutoModel produto;
 
     @ManyToOne
-    @JoinColumn (name = "pedido_id")
+    @JoinColumn(name = "pedido_id", nullable = false)
     private PedidoModel pedido;
 
     @ManyToOne
-    @JoinColumn (name = "cliente_id")
+    @JoinColumn(name = "cliente_id", nullable = false)
     private ClienteModel cliente;
-@Deprecated
+
+    @Deprecated
     public PedidoProdutoModel() {
     }
 

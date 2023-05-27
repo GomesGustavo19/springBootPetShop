@@ -17,7 +17,7 @@ public class ClienteMapper {
         CepModel cepModel = cepService.pesquisarCep(request.getCep());
 
         clienteModel.setNomeDoDono(request.getNomeDoDono());
-        clienteModel.setDocumentoCPF(request.getDocumentoCPF());
+        clienteModel.setCPF(request.getDocumentoCPF());
         clienteModel.setNomeDoPet(request.getNomeDoPet());
         clienteModel.setCep(request.getCep());
         clienteModel.setNumeroResidencia(request.getNumeroResidencia());
@@ -36,7 +36,7 @@ public class ClienteMapper {
 
         reponse.setId(clienteModel.getId());
         reponse.setNomeDoDono(clienteModel.getNomeDoDono());
-        reponse.setDocumentoCPF(clienteModel.getDocumentoCPF());
+        reponse.setDocumentoCPF(clienteModel.getCPF());
         reponse.setNomeDoPet(clienteModel.getNomeDoPet());
         reponse.setCep(clienteModel.getCep());
         reponse.setNumeroResidencia(clienteModel.getNumeroResidencia());

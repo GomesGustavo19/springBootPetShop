@@ -1,8 +1,6 @@
 package br.com.estudo.petshop.springBootPetShop.service;
 
-import br.com.estudo.petshop.springBootPetShop.exception.PesquisaCepException;
 import br.com.estudo.petshop.springBootPetShop.model.CepModel;
-import br.com.estudo.petshop.springBootPetShop.model.ClienteModel;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;

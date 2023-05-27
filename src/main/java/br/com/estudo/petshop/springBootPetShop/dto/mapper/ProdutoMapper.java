@@ -14,6 +14,7 @@ public class ProdutoMapper {
         model.setNomeDoProduto(request.getNomeDoProduto());
         model.setQuantidade(request.getQuantidade());
         model.setValor(request.getValor());
+        model.setCategoria(request.getCategoria());
 
         return model;
 
@@ -25,6 +26,7 @@ public class ProdutoMapper {
         response.setNomeDoProduto(prd.getNomeDoProduto());
         response.setQuantidade(prd.getQuantidade());
         response.setValor(prd.getValor());
+        response.setCategoria(prd.getCategoria());
 
         return response;
     }
