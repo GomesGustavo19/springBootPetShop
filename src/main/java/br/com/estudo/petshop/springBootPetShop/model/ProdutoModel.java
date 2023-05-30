@@ -1,6 +1,7 @@
 package br.com.estudo.petshop.springBootPetShop.model;
 
 import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -10,37 +11,43 @@ public class ProdutoModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private int codigoDoProduto;
     private String nomeDoProduto;
     private double valor;
-    private int quantidade;
+    @Column(name = "quantidade")
+    private int quantidadeEstoque;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private CategoriaModel categoria;
 
     @Deprecated
-    public ProdutoModel() {}
+    public ProdutoModel() {
+    }
 
-    public ProdutoModel(Integer id, int codigoDoProduto, String nomeDoProduto, double valor, int quantidade, CategoriaModel categoria) {
+    public ProdutoModel(Integer id, String nomeDoProduto, double valor, int quantidade, CategoriaModel categoria) {
         this.id = id;
-        this.codigoDoProduto = codigoDoProduto;
         this.nomeDoProduto = nomeDoProduto;
         this.valor = valor;
-        this.quantidade = quantidade;
+        this.quantidadeEstoque = quantidade;
         this.categoria = categoria;
+    }
+
+    public ProdutoModel(ProdutoModel model) {
+
+        this.id = model.getId();
+        this.nomeDoProduto = model.getNomeDoProduto();
+        this.valor = model.getValor();
+        this.quantidadeEstoque = model.getQuantidadeEstoque();
+        this.categoria = model.getCategoria();
+
     }
 
     public Integer getId() {
         return id;
     }
 
-    public int getCodigoDoProduto() {
-        return codigoDoProduto;
-    }
-
-    public void setCodigoDoProduto(int codigoDoProduto) {
-        this.codigoDoProduto = codigoDoProduto;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNomeDoProduto() {
@@ -59,12 +66,12 @@ public class ProdutoModel implements Serializable {
         this.valor = valor;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
     }
 
     public CategoriaModel getCategoria() {
@@ -92,10 +99,10 @@ public class ProdutoModel implements Serializable {
     public String toString() {
         return "ProdutoModel{" +
                 "id=" + id +
-                ", codigoDoProduto=" + codigoDoProduto +
                 ", nomeDoProduto='" + nomeDoProduto + '\'' +
                 ", valor=" + valor +
-                ", quantidade=" + quantidade +
+                ", quantidadeEstoque=" + quantidadeEstoque +
+                ", categoria=" + categoria +
                 '}';
     }
 }

@@ -3,7 +3,7 @@ package br.com.estudo.petshop.springBootPetShop.dto.response;
 public class ClienteResponse {
     private Integer id;
     private String nomeDoDono;
-    private String documentoCPF;
+    private String cpf;
     private String nomeDoPet;
     private String cep;
     private String numeroResidencia;
@@ -27,56 +27,37 @@ public class ClienteResponse {
         this.nomeDoDono = nomeDoDono;
     }
 
-    public String getDocumentoCPF() {
-        return documentoCPF;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setDocumentoCPF(String documentoCPF) {
-        this.documentoCPF = documentoCPF;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public String getNomeDoPet() {
-        return nomeDoPet;
-    }
 
     public void setNomeDoPet(String nomeDoPet) {
         this.nomeDoPet = nomeDoPet;
     }
 
-    public String getCep() {
-        return cep;
-    }
 
     public void setCep(String cep) {
         this.cep = cep;
     }
 
-    public String getNumeroResidencia() {
-        return numeroResidencia;
-    }
 
     public void setNumeroResidencia(String numeroResidencia) {
         this.numeroResidencia = numeroResidencia;
     }
 
-    public String getLocalidade() {
-        return localidade;
-    }
 
     public void setLocalidade(String localidade) {
         this.localidade = localidade;
     }
 
-    public String getBairro() {
-        return bairro;
-    }
 
     public void setBairro(String bairro) {
         this.bairro = bairro;
-    }
-
-    public String getLogradouro() {
-        return logradouro;
     }
 
     public void setLogradouro(String logradouro) {

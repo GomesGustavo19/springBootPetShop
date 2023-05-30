@@ -32,7 +32,6 @@ public class ClienteController {
 
     @GetMapping(value = "listar")
     public List<ClienteResponse> listarUsario() {
-        ClienteModel clienteModel = new ClienteModel();
         List<ClienteModel> modelListar = service.listarUsario().getBody();
         return ClienteMapper.toClienteListReponse(modelListar);
 

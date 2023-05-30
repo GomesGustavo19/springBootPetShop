@@ -3,7 +3,7 @@ package br.com.estudo.petshop.springBootPetShop.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "pedidosProduto")
+@Table(name = "pedidoProduto")
 public class PedidoProdutoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,14 +21,26 @@ public class PedidoProdutoModel {
     @JoinColumn(name = "cliente_id", nullable = false)
     private ClienteModel cliente;
 
+    private String quantiade;
+
     @Deprecated
     public PedidoProdutoModel() {
     }
 
-    public PedidoProdutoModel(ProdutoModel produto, PedidoModel pedido, ClienteModel cliente) {
+    public PedidoProdutoModel(Integer id, ProdutoModel produto, PedidoModel pedido, ClienteModel cliente, String quantiade) {
+        this.id = id;
         this.produto = produto;
         this.pedido = pedido;
         this.cliente = cliente;
+        this.quantiade = quantiade;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public ProdutoModel getProduto() {
@@ -53,6 +65,14 @@ public class PedidoProdutoModel {
 
     public void setCliente(ClienteModel cliente) {
         this.cliente = cliente;
+    }
+
+    public String getQuantiade() {
+        return quantiade;
+    }
+
+    public void setQuantiade(String quantiade) {
+        this.quantiade = quantiade;
     }
 
     @Override

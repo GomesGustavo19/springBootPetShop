@@ -3,7 +3,7 @@ package br.com.estudo.petshop.springBootPetShop.dto.resquest;
 public class ClienteRequest {
     private Integer id;
     private String nomeDoDono;
-    private String documentoCPF;
+    private String cpf;
     private String nomeDoPet;
     private String cep;
     private String numeroResidencia;
@@ -24,12 +24,12 @@ public class ClienteRequest {
         this.nomeDoDono = nomeDoDono;
     }
 
-    public String getDocumentoCPF() {
-        return documentoCPF;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setDocumentoCPF(String documentoCPF) {
-        this.documentoCPF = documentoCPF;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getNomeDoPet() {

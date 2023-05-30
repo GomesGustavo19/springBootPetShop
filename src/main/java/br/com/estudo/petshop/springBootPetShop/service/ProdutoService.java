@@ -1,15 +1,15 @@
 package br.com.estudo.petshop.springBootPetShop.service;
 
+import br.com.estudo.petshop.springBootPetShop.dto.response.ProdutoResponse;
 import br.com.estudo.petshop.springBootPetShop.model.ProdutoModel;
 import br.com.estudo.petshop.springBootPetShop.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.swing.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProdutoService {
@@ -25,11 +25,12 @@ public class ProdutoService {
 
     }
 
-    public ResponseEntity<List<ProdutoModel>> listar() {
+    public List<ProdutoModel> listar() {
 
-        List<ProdutoModel> modeList = repository.findAll();
+        List<ProdutoModel> modeList;
+        modeList = repository.produtoCategorizado().stream().map(x -> new ProdutoModel(x)).collect(Collectors.toList());
 
-        return new ResponseEntity<List<ProdutoModel>>(modeList, HttpStatus.OK);
+        return modeList;
 
     }
 
@@ -45,7 +46,6 @@ public class ProdutoService {
     public ResponseEntity<ProdutoModel> atualizarPorId(ProdutoModel model) {
 
         if (model.getId() == null) {
-            System.out.println("É necessario digitar o id para atualizar");
             return new ResponseEntity<ProdutoModel>(HttpStatus.BAD_REQUEST);
         } else if (model.getId() == model.getId()) {
             ProdutoModel produtoModel = repository.saveAndFlush(model);

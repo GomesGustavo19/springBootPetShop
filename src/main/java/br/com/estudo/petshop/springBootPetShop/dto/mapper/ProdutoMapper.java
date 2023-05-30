@@ -6,44 +6,58 @@ import br.com.estudo.petshop.springBootPetShop.model.ProdutoModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProdutoMapper {
 
     public static ProdutoModel toPorduto(ProdutoRequest request) {
         ProdutoModel model = new ProdutoModel();
+
         model.setNomeDoProduto(request.getNomeDoProduto());
-        model.setQuantidade(request.getQuantidade());
+        model.setQuantidadeEstoque(request.getQuantidadeEstoque());
         model.setValor(request.getValor());
-        model.setCategoria(request.getCategoria());
+        model.setCategoria(CategoriaMapper.toCategoria(request.getCategoria()));
 
         return model;
-
     }
 
-    public static ProdutoResponse toProdutoResponse(ProdutoModel prd) {
+    public static ProdutoModel toPordutoAtualizar(ProdutoRequest request) {
+        ProdutoModel model = new ProdutoModel();
+
+        model.setId(request.getId());
+        model.setNomeDoProduto(request.getNomeDoProduto());
+        model.setQuantidadeEstoque(request.getQuantidadeEstoque());
+        model.setValor(request.getValor());
+        model.setCategoria(CategoriaMapper.toCategoria(request.getCategoria()));
+
+        return model;
+    }
+
+    public static ProdutoResponse toProdutoResponse(ProdutoModel model) {
         ProdutoResponse response = new ProdutoResponse();
-        response.setId(prd.getId());
-        response.setNomeDoProduto(prd.getNomeDoProduto());
-        response.setQuantidade(prd.getQuantidade());
-        response.setValor(prd.getValor());
-        response.setCategoria(prd.getCategoria());
+
+        response.setId(model.getId());
+        response.setNomeDoProduto(model.getNomeDoProduto());
+        response.setQuantidadeEstoque(model.getQuantidadeEstoque());
+        response.setValor(model.getValor());
+        response.setCategoria(CategoriaMapper.toCategoriaResponse(model.getCategoria()));
 
         return response;
     }
 
-    public static List<ProdutoResponse> toProdutoResponseList(List<ProdutoModel> prdList) {
+    public static List<ProdutoResponse> toProdutoResponseList(List<ProdutoModel> produtoModelList) {
 
-        List<ProdutoResponse> modelsList = new ArrayList<>();
+        List<ProdutoResponse> responseList = new ArrayList<>();
 
-        for (ProdutoModel model : prdList) {
+        for (ProdutoModel model : produtoModelList) {
 
             ProdutoResponse response = toProdutoResponse(model);
 
-            modelsList.add(response);
+            responseList.add(response);
 
         }
 
-        return modelsList;
+        return responseList.stream().map(x -> new ProdutoResponse(x)).collect(Collectors.toList());
 
     }
 

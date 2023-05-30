@@ -1,6 +1,8 @@
 package br.com.estudo.petshop.springBootPetShop.model;
 
+import br.com.estudo.petshop.springBootPetShop.validations.constrains.Cep;
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
 
 
@@ -15,9 +17,11 @@ public class ClienteModel implements Serializable {
     private Integer id;
     private String nomeDoDono;
     @CPF
-    private String CPF;
+    private String Cpf;
     private String nomeDoPet;
+    @Cep
     private String cep;
+    @NotBlank
     private String numeroResidencia;
     private String localidade;
     private String bairro;
@@ -28,7 +32,7 @@ public class ClienteModel implements Serializable {
     public ClienteModel(Integer id, String nomeDoDono, String CPF, String nomeDoPet, String cep, String numeroResidencia, String localidade, String bairro, String logradouro) {
         this.id = id;
         this.nomeDoDono = nomeDoDono;
-        this.CPF = CPF;
+        this.Cpf = Cpf;
         this.nomeDoPet = nomeDoPet;
         this.cep = cep;
         this.numeroResidencia = numeroResidencia;
@@ -41,6 +45,10 @@ public class ClienteModel implements Serializable {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getNomeDoDono() {
         return nomeDoDono;
     }
@@ -49,12 +57,12 @@ public class ClienteModel implements Serializable {
         this.nomeDoDono = nomeDoDono;
     }
 
-    public String getCPF() {
-        return CPF;
+    public String getCpf() {
+        return Cpf;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCpf(String cpf) {
+        Cpf = cpf;
     }
 
     public String getNomeDoPet() {
@@ -110,7 +118,7 @@ public class ClienteModel implements Serializable {
         return "ClienteModel{" +
                 "id=" + id +
                 ", nomeDoDono='" + nomeDoDono + '\'' +
-                ", CPF='" + CPF + '\'' +
+                ", Cpf='" + Cpf + '\'' +
                 ", nomeDoPet='" + nomeDoPet + '\'' +
                 ", cep='" + cep + '\'' +
                 ", numeroResidencia='" + numeroResidencia + '\'' +

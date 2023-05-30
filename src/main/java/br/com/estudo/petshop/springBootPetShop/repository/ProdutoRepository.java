@@ -7,9 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ProdutoRepository extends JpaRepository<ProdutoModel, Integer> {
-
-   // @Query(nativeQuery = true,value = "select produtos.nomeDoProduto,categoria.categoria from produtos join categoria on produtos.categoria_id = categoria:id")
-   // List<ProdutoModel> produtoCategorizado(Integer id);
-
+   @Query("SELECT obj FROM ProdutoModel obj JOIN FETCH obj.categoria")
+   List<ProdutoModel> produtoCategorizado();
 
 }

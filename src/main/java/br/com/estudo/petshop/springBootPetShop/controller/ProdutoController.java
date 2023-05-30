@@ -5,7 +5,6 @@ import br.com.estudo.petshop.springBootPetShop.dto.response.ProdutoResponse;
 import br.com.estudo.petshop.springBootPetShop.dto.resquest.ProdutoRequest;
 import br.com.estudo.petshop.springBootPetShop.model.ProdutoModel;
 import br.com.estudo.petshop.springBootPetShop.service.ProdutoService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,9 +31,10 @@ public class ProdutoController {
     }
     @GetMapping(value = "listar")
     public List<ProdutoResponse> listar(){
-        ProdutoModel model = new ProdutoModel();
-        List<ProdutoModel> modelListado = service.listar().getBody();
-        return ProdutoMapper.toProdutoResponseList(modelListado);
+
+        List<ProdutoModel> modelList = service.listar().stream().toList();
+        return ProdutoMapper.toProdutoResponseList(modelList);
+
     }
 
     @DeleteMapping(value = "excluir")
@@ -46,7 +46,7 @@ public class ProdutoController {
     @PutMapping(value = "atualizar")
     public ResponseEntity<ProdutoResponse> atualizarPorId(@RequestBody ProdutoRequest request){
 
-        ProdutoModel model = ProdutoMapper.toPorduto(request);
+        ProdutoModel model = ProdutoMapper.toPordutoAtualizar(request);
         ProdutoModel modelAtualizado = service.atualizarPorId(model).getBody();
         ProdutoResponse response = ProdutoMapper.toProdutoResponse(modelAtualizado);
 

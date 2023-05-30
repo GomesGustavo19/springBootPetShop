@@ -18,7 +18,7 @@ public class CepValidation implements ConstraintValidator<Cep, String> {
 
         String cep = s;
 
-        if (cep == null) throw new PesquisaCepException("Cep informado é invaliado");
+        if (cep == null) throw new PesquisaCepException("Por gentileza informe um cep");
 
         return cep.matches("[-+]?[0-9]*\\.?[0-9]+");
     }

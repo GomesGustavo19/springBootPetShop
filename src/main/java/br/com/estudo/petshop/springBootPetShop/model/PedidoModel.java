@@ -2,7 +2,7 @@ package br.com.estudo.petshop.springBootPetShop.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.util.Date;
 import java.util.Objects;
 @Entity
 @Table(name = "pedidos")
@@ -10,23 +10,26 @@ public class PedidoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Double valorTotal;
 
-    @OneToMany(mappedBy = "pedido")
-    private List<PedidoProdutoModel> pedidoProduto;
+    private Date data;
+    private Double valorTotal;
 
     @Deprecated
     public PedidoModel() {
     }
 
-    public PedidoModel(Integer id, Double valorTotal, List<PedidoProdutoModel> pedidoProduto) {
+    public PedidoModel(Integer id, Date data, Double valorTotal) {
         this.id = id;
+        this.data = data;
         this.valorTotal = valorTotal;
-        this.pedidoProduto = pedidoProduto;
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Double getValorTotal() {
@@ -37,12 +40,12 @@ public class PedidoModel {
         this.valorTotal = valorTotal;
     }
 
-    public List<PedidoProdutoModel> getPedidoProduto() {
-        return pedidoProduto;
+    public Date getData() {
+        return data;
     }
 
-    public void setPedidoProduto(List<PedidoProdutoModel> pedidoProduto) {
-        this.pedidoProduto = pedidoProduto;
+    public void setData(Date data) {
+        this.data = data;
     }
 
     @Override
@@ -62,8 +65,8 @@ public class PedidoModel {
     public String toString() {
         return "PedidoModel{" +
                 "id=" + id +
+                ", data=" + data +
                 ", valorTotal=" + valorTotal +
                 '}';
     }
 }
-
