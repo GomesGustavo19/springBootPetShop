@@ -11,6 +11,22 @@ public class ClienteResponse {
     private String bairro;
     private String logradouro;
 
+    public ClienteResponse() {
+    }
+
+    public ClienteResponse(Integer id, String nomeDoDono, String cpf, String nomeDoPet, String cep, String numeroResidencia, String localidade, String bairro, String logradouro) {
+        this.id = id;
+        this.nomeDoDono = nomeDoDono;
+        this.cpf = cpf;
+        this.nomeDoPet = nomeDoPet;
+        this.cep = cep;
+        this.numeroResidencia = numeroResidencia;
+        this.localidade = localidade;
+        this.bairro = bairro;
+        this.logradouro = logradouro;
+    }
+
+
     public Integer getId() {
         return id;
     }

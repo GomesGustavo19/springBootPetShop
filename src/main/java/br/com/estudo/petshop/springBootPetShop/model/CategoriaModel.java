@@ -3,7 +3,6 @@ package br.com.estudo.petshop.springBootPetShop.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 @Entity

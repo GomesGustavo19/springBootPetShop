@@ -1,10 +1,5 @@
 package br.com.estudo.petshop.springBootPetShop.dto.response;
 
-import br.com.estudo.petshop.springBootPetShop.model.CategoriaModel;
-import br.com.estudo.petshop.springBootPetShop.model.ProdutoModel;
-
-import java.util.List;
-
 public class ProdutoResponse {
 
     private Integer id;

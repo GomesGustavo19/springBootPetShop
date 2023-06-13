@@ -2,15 +2,15 @@ package br.com.estudo.petshop.springBootPetShop.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 @Entity
 @Table(name = "pedidos")
-public class PedidoModel {
+public class PedidoModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private Date data;
     private Double valorTotal;
 

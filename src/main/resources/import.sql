@@ -1,3 +1,9 @@
+-- populando o banco de dados para cliente
+insert into cliente (Cpf,bairro,cep,localidade,logradouro,nomeDoDono,nomeDoPet,numeroResidencia) values('432.014.830-44','Parque Guarani','08235-750','São Paulo','Rua Laranja de Natal','Cleiton','Pichulo','456');
+insert into cliente (Cpf,bairro,cep,localidade,logradouro,nomeDoDono,nomeDoPet,numeroResidencia) values('756.338.040-07','Parque Guarani','08235-750','São Paulo','Rua Laranja de Natal','Jorjina','Caramelo','452');
+insert into cliente (Cpf,bairro,cep,localidade,logradouro,nomeDoDono,nomeDoPet,numeroResidencia) values('198.907.650-55','Bela Vista','01317-901','São Paulo','Avenida Brigadeiro Luís Antônio','Vitoria','Nico','317');
+insert into cliente (Cpf,bairro,cep,localidade,logradouro,nomeDoDono,nomeDoPet,numeroResidencia) values('959.155.760-44','Bela Vista','01317-901','São Paulo','Avenida Brigadeiro Luís Antônio','Casemiro','Amaral','371');
+
 -- populando o banco de dados para categoria
 insert into categoria (categoria) values('ração');
 insert into categoria (categoria) values('acessorio');

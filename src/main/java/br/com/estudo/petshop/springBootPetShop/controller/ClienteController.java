@@ -32,7 +32,7 @@ public class ClienteController {
 
     @GetMapping(value = "listar")
     public List<ClienteResponse> listarUsario() {
-        List<ClienteModel> modelListar = service.listarUsario().getBody();
+        List<ClienteModel> modelListar = service.listarUsario().stream().toList();
         return ClienteMapper.toClienteListReponse(modelListar);
 
     }

@@ -1,6 +1,5 @@
 package br.com.estudo.petshop.springBootPetShop.service;
 
-import br.com.estudo.petshop.springBootPetShop.dto.response.ProdutoResponse;
 import br.com.estudo.petshop.springBootPetShop.model.ProdutoModel;
 import br.com.estudo.petshop.springBootPetShop.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,7 +34,6 @@ public class ProdutoService {
 
     }
 
-
     public ResponseEntity<String> excluirPorId(Integer id) {
 
         repository.deleteById(id);
@@ -54,5 +53,24 @@ public class ProdutoService {
             return new ResponseEntity<ProdutoModel>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    public Optional<ProdutoModel> pesquisarProdutoId(Integer id) {
+
+        Optional<ProdutoModel> modelList;
+        modelList = repository.findById(id);
+
+        return modelList;
+
+    }
+
+    public List<ProdutoModel> pesquisarProdutoPorTodosId(List<Integer> id) {
+
+        List<ProdutoModel> modelList;
+        modelList = repository.findAllById(id).stream().map(produtoListado -> new ProdutoModel(produtoListado)).collect(Collectors.toList());
+
+        return modelList;
+
+    }
+
 
 }

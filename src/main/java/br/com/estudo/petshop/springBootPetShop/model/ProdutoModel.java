@@ -1,8 +1,11 @@
 package br.com.estudo.petshop.springBootPetShop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,6 +22,10 @@ public class ProdutoModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private CategoriaModel categoria;
+
+    @ManyToMany
+    private List<CestaDeCompraModel> cestaDeCompra = new ArrayList<>();
+
 
     @Deprecated
     public ProdutoModel() {
@@ -82,6 +89,14 @@ public class ProdutoModel implements Serializable {
         this.categoria = categoria;
     }
 
+    public List<CestaDeCompraModel> getCestaDeCompra() {
+        return cestaDeCompra;
+    }
+
+    public void setCestaDeCompra(List<CestaDeCompraModel> cestaDeCompra) {
+        this.cestaDeCompra = cestaDeCompra;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -105,4 +120,6 @@ public class ProdutoModel implements Serializable {
                 ", categoria=" + categoria +
                 '}';
     }
+
+
 }

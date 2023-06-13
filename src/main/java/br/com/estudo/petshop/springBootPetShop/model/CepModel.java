@@ -3,7 +3,9 @@ package br.com.estudo.petshop.springBootPetShop.model;
 
 import br.com.estudo.petshop.springBootPetShop.validations.constrains.Cep;
 
-public class CepModel {
+import java.io.Serializable;
+
+public class CepModel implements Serializable {
     @Cep
     private String cep;
     private String numeroResidencia;

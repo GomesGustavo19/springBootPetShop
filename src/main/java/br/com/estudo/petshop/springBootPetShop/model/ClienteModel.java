@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
 
-
 import java.io.Serializable;
 
 @Entity
@@ -39,6 +38,29 @@ public class ClienteModel implements Serializable {
         this.localidade = localidade;
         this.bairro = bairro;
         this.logradouro = logradouro;
+    }
+
+    public ClienteModel(String nomeDoDono, String cpf, String nomeDoPet, String cep, String numeroResidencia, String localidade, String bairro, String logradouro) {
+        this.nomeDoDono = nomeDoDono;
+        this.Cpf = cpf;
+        this.nomeDoPet = nomeDoPet;
+        this.cep = cep;
+        this.numeroResidencia = numeroResidencia;
+        this.localidade = localidade;
+        this.bairro = bairro;
+        this.logradouro = logradouro;
+    }
+
+    public ClienteModel(ClienteModel clienteModel) {
+        this.nomeDoDono = clienteModel.getNomeDoDono();
+        this.Cpf = clienteModel.getCpf();
+        this.nomeDoPet = clienteModel.getNomeDoPet();
+        this.cep = clienteModel.getCep();
+        this.numeroResidencia = clienteModel.getNumeroResidencia();
+        this.localidade = clienteModel.getLocalidade();
+        this.bairro = clienteModel.getBairro();
+        this.logradouro = clienteModel.getLogradouro();
+
     }
 
     public Integer getId() {

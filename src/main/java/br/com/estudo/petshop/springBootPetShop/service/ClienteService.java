@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
@@ -23,11 +24,12 @@ public class ClienteService {
         return new ResponseEntity<ClienteModel>(model, HttpStatus.CREATED);
     }
 
-    public ResponseEntity<List<ClienteModel>> listarUsario(){
+    public List<ClienteModel> listarUsario(){
 
-        List<ClienteModel> clienteModels = repository.findAll();
+        List<ClienteModel> clienteModels;
+        clienteModels = repository.pesquisarPorTodos().stream().map(x-> new ClienteModel(x)).collect(Collectors.toList());
 
-        return new ResponseEntity<List<ClienteModel>>(clienteModels,HttpStatus.OK);
+        return clienteModels;
 
     }
 

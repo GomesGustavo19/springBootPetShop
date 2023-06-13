@@ -8,6 +8,18 @@ public class ClienteRequest {
     private String cep;
     private String numeroResidencia;
 
+    public ClienteRequest() {
+    }
+
+    public ClienteRequest(Integer id, String nomeDoDono, String cpf, String nomeDoPet, String cep, String numeroResidencia) {
+        this.id = id;
+        this.nomeDoDono = nomeDoDono;
+        this.cpf = cpf;
+        this.nomeDoPet = nomeDoPet;
+        this.cep = cep;
+        this.numeroResidencia = numeroResidencia;
+    }
+
     public Integer getId() {
         return id;
     }

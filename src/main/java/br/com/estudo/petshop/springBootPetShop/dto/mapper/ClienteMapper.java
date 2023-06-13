@@ -6,14 +6,15 @@ import br.com.estudo.petshop.springBootPetShop.model.CepModel;
 import br.com.estudo.petshop.springBootPetShop.model.ClienteModel;
 import br.com.estudo.petshop.springBootPetShop.service.CepService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteMapper {
 
     public static ClienteModel toCliente(ClienteRequest request) {
-        ClienteModel clienteModel = new ClienteModel();
         CepService cepService = new CepService();
         CepModel cepModel = cepService.pesquisarCep(request.getCep());
+        ClienteModel clienteModel = new ClienteModel();
 
         clienteModel.setNomeDoDono(request.getNomeDoDono());
         clienteModel.setCpf(request.getCpf());

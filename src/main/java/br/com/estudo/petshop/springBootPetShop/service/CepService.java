@@ -2,6 +2,7 @@ package br.com.estudo.petshop.springBootPetShop.service;
 
 import br.com.estudo.petshop.springBootPetShop.model.CepModel;
 import com.google.gson.Gson;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -9,6 +10,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+@Service
 public class CepService {
 
     public CepModel pesquisarCep(String cep) {
