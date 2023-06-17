@@ -12,29 +12,20 @@ public class PedidoProdutoModel implements Serializable {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id", nullable = false)
-    private ProdutoModel produto;
-
-    @ManyToOne
-    @JoinColumn(name = "pedido_id", nullable = false)
-    private PedidoModel pedido;
+    @JoinColumn(name = "cestaDeCompra_id", nullable = false)
+    private CestaDeCompraModel cestaDeCompra;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
     private ClienteModel cliente;
 
-    private String quantiade;
-
     @Deprecated
     public PedidoProdutoModel() {
     }
 
-    public PedidoProdutoModel(Integer id, ProdutoModel produto, PedidoModel pedido, ClienteModel cliente, String quantiade) {
-        this.id = id;
-        this.produto = produto;
-        this.pedido = pedido;
+    public PedidoProdutoModel(CestaDeCompraModel cestaDeCompra, ClienteModel cliente) {
+        this.cestaDeCompra = cestaDeCompra;
         this.cliente = cliente;
-        this.quantiade = quantiade;
     }
 
     public Integer getId() {
@@ -45,20 +36,12 @@ public class PedidoProdutoModel implements Serializable {
         this.id = id;
     }
 
-    public ProdutoModel getProduto() {
-        return produto;
+    public CestaDeCompraModel getCestaDeCompra() {
+        return cestaDeCompra;
     }
 
-    public void setProduto(ProdutoModel produto) {
-        this.produto = produto;
-    }
-
-    public PedidoModel getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(PedidoModel pedido) {
-        this.pedido = pedido;
+    public void setCestaDeCompra(CestaDeCompraModel cestaDeCompra) {
+        this.cestaDeCompra = cestaDeCompra;
     }
 
     public ClienteModel getCliente() {
@@ -67,22 +50,5 @@ public class PedidoProdutoModel implements Serializable {
 
     public void setCliente(ClienteModel cliente) {
         this.cliente = cliente;
-    }
-
-    public String getQuantiade() {
-        return quantiade;
-    }
-
-    public void setQuantiade(String quantiade) {
-        this.quantiade = quantiade;
-    }
-
-    @Override
-    public String toString() {
-        return "PedidoProduto{" +
-                "produto=" + produto +
-                ", pedido=" + pedido +
-                ", cliente=" + cliente +
-                '}';
     }
 }

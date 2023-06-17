@@ -24,8 +24,7 @@ public class ProdutoModel implements Serializable {
     private CategoriaModel categoria;
 
     @ManyToMany
-    private List<CestaDeCompraModel> cestaDeCompra = new ArrayList<>();
-
+    private List<CestaDeCompraModel> cestaDeCompra = new ArrayList<CestaDeCompraModel>();
 
     @Deprecated
     public ProdutoModel() {

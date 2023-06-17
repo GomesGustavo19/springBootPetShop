@@ -20,8 +20,8 @@ public class ClienteModel implements Serializable {
     private String nomeDoPet;
     @Cep
     private String cep;
-    @NotBlank
     private String numeroResidencia;
+    @NotBlank
     private String localidade;
     private String bairro;
     private String logradouro;

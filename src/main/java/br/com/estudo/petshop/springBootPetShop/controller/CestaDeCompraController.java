@@ -18,9 +18,9 @@ public class CestaDeCompraController {
     private CestaDeCompraService service;
 
     @PutMapping(value = "carrinho")
-    public CestaDeCompraResponse carrinho(@RequestParam("idProduto") Integer idProduto) {
+    public CestaDeCompraResponse carrinho(@RequestParam("idProduto") Integer idProduto,@RequestParam("qtd") Integer qtd) {
 
-        CestaDeCompraModel model = service.carrinhoProduto(idProduto);
+        CestaDeCompraModel model = service.carrinhoProduto(idProduto,qtd);
         return CestaDeCompraMapper.toCestaDeCompraResponse(model);
 
     }

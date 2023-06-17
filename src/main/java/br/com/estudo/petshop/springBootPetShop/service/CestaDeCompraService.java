@@ -1,20 +1,12 @@
 package br.com.estudo.petshop.springBootPetShop.service;
 
-import br.com.estudo.petshop.springBootPetShop.dto.mapper.CestaDeCompraMapper;
-import br.com.estudo.petshop.springBootPetShop.dto.response.CestaDeCompraResponse;
 import br.com.estudo.petshop.springBootPetShop.model.CestaDeCompraModel;
-import br.com.estudo.petshop.springBootPetShop.model.ClienteModel;
-import br.com.estudo.petshop.springBootPetShop.model.PedidoModel;
 import br.com.estudo.petshop.springBootPetShop.model.ProdutoModel;
 import br.com.estudo.petshop.springBootPetShop.repository.CestaDeCompraRepository;
-import br.com.estudo.petshop.springBootPetShop.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,10 +18,6 @@ public class CestaDeCompraService {
     @Autowired
     private CestaDeCompraRepository repository;
 
-    @Autowired
-    private PedidoRepository pedidoRepository;
-
-
     public Optional<CestaDeCompraModel> cestaBasicaListado(Integer idPedido) {
         Optional<CestaDeCompraModel> cestaDeCompraModelList;
         cestaDeCompraModelList = repository.findById(idPedido);
@@ -37,57 +25,38 @@ public class CestaDeCompraService {
 
     }
 
-    public CestaDeCompraModel carrinhoProduto(Integer idProduto) {
-
-        List<CestaDeCompraModel> cestaDeCompraList = new ArrayList<CestaDeCompraModel>();
-
-        PedidoModel buscarPedido = new PedidoModel();
-        buscarPedido.setId(1);
-
-        Optional<ProdutoModel> produtoListado = produtoService.pesquisarProdutoId(idProduto);
-        Optional<CestaDeCompraModel> cestaExistante = cestaBasicaListado(buscarPedido.getId());
+    public CestaDeCompraModel carrinhoProduto(Integer idProduto, Integer qtd) {
 
         CestaDeCompraModel cestaDeCompraModel = new CestaDeCompraModel();
 
+        cestaDeCompraModel.setId(1);
 
-        if (produtoListado.isPresent() && cestaExistante.isPresent()
-                && produtoListado.get().getQuantidadeEstoque() >= cestaDeCompraModel.getQuantidade()
-                && !(cestaExistante.get().getProduto().isEmpty())) {
+        Optional<ProdutoModel> produtoListado = produtoService.pesquisarProdutoId(idProduto);
+        Optional<CestaDeCompraModel> cestaExistante = cestaBasicaListado(cestaDeCompraModel.getId());
 
-            produtoListado.get().getCestaDeCompra().add(cestaExistante.get());
+
+        if (produtoListado.isPresent() && cestaExistante.isPresent()) {
 
             cestaDeCompraModel.setIdProduto(produtoListado.get().getId());
             cestaDeCompraModel.setNomeProduto(produtoListado.get().getNomeDoProduto());
-            cestaDeCompraModel.setQuantidade(2);
             cestaDeCompraModel.setValorUnitario(produtoListado.get().getValor());
+            cestaDeCompraModel.setQuantidade(qtd);
             cestaDeCompraModel.setValorTotal(cestaDeCompraModel.getQuantidade() * produtoListado.get().getValor());
 
-            cestaDeCompraList.add(cestaDeCompraModel);
-
-            cestaExistante.get().setProduto(Collections.singletonList(produtoListado.get()));
-
-            int contador = 0;
-
-            Integer[] vetor = new Integer[cestaExistante.get().getProduto().size()];
-
-            for (int i = 0; i < cestaExistante.get().getProduto().size(); i++) {
-
-                vetor[i] = cestaExistante.get().getProduto().get(i).getId();
-
-                if (vetor[i] == cestaExistante.get().getId()) {
-                    contador++;
-                    System.out.println("Adicionado ao carrinho");
-
-                }
-
+            if (cestaExistante.get().getIdProduto() == produtoListado.get().getId()) {
+                cestaDeCompraModel.setQuantidade(qtd + cestaExistante.get().getQuantidade());
+                cestaDeCompraModel.setValorTotal(cestaDeCompraModel.getQuantidade() * produtoListado.get().getValor());
+                cestaDeCompraModel.getProduto().add(produtoListado.get());
+                repository.save(cestaDeCompraModel);
+            } else {
+                cestaExistante.get().setProduto(cestaDeCompraModel.getProduto());
+                repository.save(cestaDeCompraModel);
             }
-
-            contador++;
-            System.out.println("Qtd prd: " + contador);
 
             produtoListado.get().setQuantidadeEstoque(produtoListado.get().getQuantidadeEstoque() - cestaDeCompraModel.getQuantidade());
             System.out.println(produtoListado.get().getQuantidadeEstoque());
 
+            produtoService.salvar(produtoListado.get());
 
             return cestaDeCompraModel;
 
@@ -96,7 +65,7 @@ public class CestaDeCompraService {
             //Adicinando o produto ao carrinho
             cestaDeCompraModel.setIdProduto(produtoListado.get().getId());
             cestaDeCompraModel.setNomeProduto(produtoListado.get().getNomeDoProduto());
-            cestaDeCompraModel.setQuantidade(2);
+            cestaDeCompraModel.setQuantidade(qtd);
             cestaDeCompraModel.setValorUnitario(produtoListado.get().getValor());
             cestaDeCompraModel.setValorTotal(cestaDeCompraModel.getQuantidade() * produtoListado.get().getValor());
 
@@ -106,18 +75,16 @@ public class CestaDeCompraService {
             //Calculo do valor total
             cestaDeCompraModel.setValorTotal(cestaDeCompraModel.getQuantidade() * produtoListado.get().getValor());
 
-            //Produto adicionado ao carrinho
-            cestaDeCompraList.add(cestaDeCompraModel);
-
             //Salva o produto com a nova quantidade
             produtoService.salvar(produtoListado.get());
+
+            repository.save(cestaDeCompraModel);
 
             System.out.println("Adicionado pelo else");
 
             return cestaDeCompraModel;
 
         }
-
 
     }
 
